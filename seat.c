@@ -119,7 +119,8 @@ update_capabilities(struct cg_seat *seat)
 		caps |= WL_SEAT_CAPABILITY_KEYBOARD;
 	}
 	if (!wl_list_empty(&seat->pointers)) {
-		caps |= WL_SEAT_CAPABILITY_POINTER;
+	    // We always want to remove the mouse pointer
+		// caps |= WL_SEAT_CAPABILITY_POINTER;
 	}
 	if (!wl_list_empty(&seat->touch)) {
 		caps |= WL_SEAT_CAPABILITY_TOUCH;
