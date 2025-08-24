@@ -94,6 +94,13 @@ view_position(struct cg_view *view)
 	struct wlr_box layout_box;
 	wlr_output_layout_get_box(view->server->output_layout, NULL, &layout_box);
 
+	if (view->server->output_fixed_width > 0) {
+        layout_box.width = view->server->output_fixed_width;
+	}
+	if (view->server->output_fixed_height > 0) {
+        layout_box.height = view->server->output_fixed_height;
+	}
+
 	if (view_is_primary(view) || view_extends_output_layout(view, &layout_box)) {
 		view_maximize(view, &layout_box);
 	} else {

@@ -36,6 +36,8 @@ struct cg_server {
 	struct wl_list inhibitors;
 
 	enum cg_multi_output_mode output_mode;
+	int output_fixed_width;
+	int output_fixed_height;
 	struct wlr_output_layout *output_layout;
 	struct wlr_scene_output_layout *scene_output_layout;
 

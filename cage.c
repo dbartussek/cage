@@ -231,6 +231,8 @@ usage(FILE *file, const char *cage)
 		" -h\t Display this help message\n"
 		" -m extend Extend the display across all connected outputs (default)\n"
 		" -m last Use only the last connected output\n"
+		" -W\t Set fixed width\n"
+		" -H\t Set fixed height\n"
 		" -s\t Allow VT switching\n"
 		" -v\t Show the version number and exit\n"
 		"\n"
@@ -242,7 +244,7 @@ static bool
 parse_args(struct cg_server *server, int argc, char *argv[])
 {
 	int c;
-	while ((c = getopt(argc, argv, "dDhm:sv")) != -1) {
+	while ((c = getopt(argc, argv, "dDhm:svW:H:")) != -1) {
 		switch (c) {
 		case 'd':
 			server->xdg_decoration = true;
@@ -266,6 +268,14 @@ parse_args(struct cg_server *server, int argc, char *argv[])
 		case 'v':
 			fprintf(stdout, "Cage version " CAGE_VERSION "\n");
 			exit(0);
+
+        case 'W':
+			server->output_fixed_width = strtol(optarg, NULL, 0);
+			break;
+        case 'H':
+			server->output_fixed_height = strtol(optarg, NULL, 0);
+			break;
+
 		default:
 			usage(stderr, argv[0]);
 			return false;
